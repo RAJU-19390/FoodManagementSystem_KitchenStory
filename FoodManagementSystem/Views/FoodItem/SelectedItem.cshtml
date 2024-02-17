@@ -1,0 +1,17 @@
+﻿@model FoodManagementSystem.Models.FoodModel
+
+@{
+    ViewBag.Title = "SelectedItem";
+}
+
+<h2>Food Items To Order</h2>
+<center>
+    <form method="post">
+        <label>Enter Number of plates @TempData["FName"]:</label>
+        <input type="number" name="itemqty" placeholder="select here..." /><br />
+        <label>Enter Deliver Address :</label>
+        <input type="text" name="address"  placeholder="Location"/><br />
+        <input type="submit" name="SelectedItem" value="Order Now" />
+    </form>
+    @Html.ActionLink("Food Menu", "FoodMenu")
+</center>

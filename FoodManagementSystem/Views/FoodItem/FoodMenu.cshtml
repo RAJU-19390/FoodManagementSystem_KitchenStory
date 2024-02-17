@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FoodManagementSystem.Models.FoodModel>
+
+@{
+    ViewBag.Title = "FoodMenu";
+}
+
+<h2>Food Items Menu</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FName)</th>
+            <th>@Html.DisplayNameFor(model => model.FPrice)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FPrice)</td>
+                    <td>
+                        @Html.ActionLink("Select", "SelectedItem", new { Fid = item.FId })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No data available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

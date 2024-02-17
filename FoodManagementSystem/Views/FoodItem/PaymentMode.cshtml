@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "PaymentMode";
+}
+
+<h2>Payment Mode</h2>
+
+<h3>Total Amount: Rs.@ViewBag.TotalAmt</h3>
+<h3>Delivery Address: @ViewBag.Address</h3>
+
+<center>
+    <input type="button" value="Go Back" onclick="redirectToItem()" />
+</center>
+
+<center>
+    <input type="button" value="Order" onclick="redirectToOrderSuccess()" />
+</center>
+<script>
+    function redirectToOrderSuccess() {
+        window.location.href = '@Url.Action("OrderSuccess", "FoodItem")';
+    }
+    function redirectToItem() {
+        window.location.href = '@Url.Action("FoodMenu", "FoodItem")';
+    }
+</script>
+
+

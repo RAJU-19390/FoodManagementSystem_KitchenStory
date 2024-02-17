@@ -1,0 +1,40 @@
+﻿@model FoodManagementSystem.Models.FoodModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Food Item Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Update", "Edit", new { id = Model.FId }) |
+    @Html.ActionLink("Back to Menu", "Index")
+</p>

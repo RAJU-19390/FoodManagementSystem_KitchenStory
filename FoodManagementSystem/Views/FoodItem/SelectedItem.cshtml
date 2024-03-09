@@ -4,13 +4,65 @@
     ViewBag.Title = "SelectedItem";
 }
 
-<h2>Food Items To Order</h2>
+<style>
+
+
+    form {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: khaki;
+        border: 4px solid red;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(0, 0, 255, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+        form:hover {
+            box-shadow: 0 0 20px rgba(0, 12, 255, 1);
+        }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        input[type="submit"]:hover {
+            background-color:mediumvioletred;
+        }
+
+    a {
+        display: block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+        a:hover {
+            color: #0056b3;
+        }
+</style>
 <center>
+    <h2>Food Items To Order</h2>
     <form method="post">
-        <label>Enter Number of plates @TempData["FName"]:</label>
-        <input type="number" name="itemqty" placeholder="select here..." /><br />
-        <label>Enter Deliver Address :</label>
-        <input type="text" name="address"  placeholder="Location"/><br />
+        <label>Enter Number of plates for @TempData["FName"]</label>
+        <input type="number" name="itemqty" placeholder="Select quantity..." required min="1" max="300" /><br />
+        <label>Enter Delivery Address(Includes DoorNo,StreetNo,StreetName,City,Pincode)</label>
+        <input type="text" name="address" placeholder="Enter your location" required /><br />
         <input type="submit" name="SelectedItem" value="Order Now" />
     </form>
     @Html.ActionLink("Food Menu", "FoodMenu")

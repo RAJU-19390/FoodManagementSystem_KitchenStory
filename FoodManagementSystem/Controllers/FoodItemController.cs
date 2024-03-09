@@ -1,8 +1,10 @@
 ﻿using FoodLibrary;
+using FoodManagementSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using FoodManagementSystem.Models;
+
 namespace FoodManagementSystem.Controllers
 {
     public class FoodItemController : Controller
@@ -120,17 +122,27 @@ namespace FoodManagementSystem.Controllers
             }
             return View();
         }
-        public ActionResult FoodMenu()
+
+        public ActionResult FoodMenu(string item)
         {
             List<FoodMaster> itemlist = dal.GetFoodItemList();
-            List<FoodModel> foodmodels = new List<FoodModel>();
-            foreach (FoodMaster item in itemlist)
-            {
-                foodmodels.Add(new FoodModel { FId = item.FId, FName = item.FName, FPrice = item.FPrice });
 
+            if (itemlist == null)
+            {
+                return View(new List<FoodModel>());
             }
-            return View(foodmodels);
+
+            var searchResults = itemlist
+                .Where(i => i.FName != null && (item == null || i.FName.ToLower().Contains(item.ToLower())))
+                .Select(i => new FoodModel { FId = i.FId, FName = i.FName, FPrice = i.FPrice })
+                .ToList();
+
+            ViewBag.SearchTerm = item;
+
+            return View(searchResults);
         }
+
+
         public ActionResult SelectedItem(int Fid)
         {
             int food_id = Fid;

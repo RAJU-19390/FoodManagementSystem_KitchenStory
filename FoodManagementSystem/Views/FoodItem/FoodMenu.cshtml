@@ -4,35 +4,82 @@
     ViewBag.Title = "FoodMenu";
 }
 
-<h2>Food Items Menu</h2>
+<style>
+    .search-bar {
+        position: absolute;
+        top: 100px;
+        right: 300px;
+        width: 200px;
+    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.FName)</th>
-            <th>@Html.DisplayNameFor(model => model.FPrice)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null)
-        {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FPrice)</td>
-                    <td>
-                        @Html.ActionLink("Select", "SelectedItem", new { Fid = item.FId })
-                    </td>
-                </tr>
-            }
+    .card-body {
+        border: 1.5px inset violet;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: khaki;
+        box-shadow: 0 4px 8px rgba(21, 14, 12, 0.4);
+        text-align: center;
+        transition: box-shadow 0.3s ease-in-out;
+        margin: 4px 2px;
+    }
+
+        .card-body:hover {
+            box-shadow: 0 8px 16px rgb(0 0 255);
         }
-        else
-        {
-            <tr>
-                <td colspan="3">No data available.</td>
-            </tr>
+
+    input[type="search"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        box-sizing: border-box;
+        font-weight: 700;
+        color: blue;
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+        input[type="search"]:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-    </tbody>
-</table>
+</style>
+
+<h2>Food Items Menu</h2>
+<div class="search-bar">
+    <form method="get" action="@Url.Action("FoodMenu")" id="searchForm">
+        <input type="search" placeholder="Search Item..." name="item" id="searchInput" onkeypress="return enterKeySubmit(event)" />
+    </form>
+</div>
+
+<script>
+    function enterKeySubmit(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            document.getElementById('searchForm').submit();
+    }
+</script>
+@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+{
+    <p>Search Results for: @ViewBag.SearchTerm</p>
+}
+
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("SelectedItem", new { Fid = item.FId })" style="text-decoration: none; color: inherit;">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 24px; color: blue;">@Html.DisplayFor(modelItem => item.FName)</h5>
+                        <p class="card-text" style="font-size: 15px; color: darkred;">Rs.@Html.DisplayFor(modelItem => item.FPrice)</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+}
+else
+{
+    <p>No items found.</p>
+}

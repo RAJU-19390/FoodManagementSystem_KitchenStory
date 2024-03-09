@@ -44,7 +44,6 @@ namespace FoodManagementSystem.Controllers
             {
                     FoodMaster item = new FoodMaster
                     {
-                        FId = model.FId,
                         FName = model.FName,
                         FPrice = model.FPrice,
                     };

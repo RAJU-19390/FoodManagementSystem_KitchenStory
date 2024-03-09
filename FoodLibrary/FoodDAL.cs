@@ -15,7 +15,6 @@ namespace FoodLibrary
             try
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@p_FID", item.FId);
                 cmd.Parameters.AddWithValue("@p_FName", item.FName);
                 cmd.Parameters.AddWithValue("@p_FPrice", item.FPrice);
                 con.Open();
